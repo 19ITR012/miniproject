@@ -1,0 +1,100 @@
+/* Styling for the main */
+body{
+  margin: 0;
+}
+.main {
+  background-image: url('jinbg.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Styling for the container */
+.container {
+  max-width: 400px; /* Fixed the typo: change '4x' to '400px' */
+  margin: 0 auto;
+  padding: 5%;
+  border: 1px solid #ccc;
+  border-radius: 5vmin;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Styling for headings */
+h2 {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Styling for form elements */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+.input {
+  padding: 1rem;
+  margin-bottom: 10px;
+  width: 17rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Arial, Helvetica, sans-serif;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.input::placeholder {
+  margin-left: 10px;
+}
+
+/* Styling for error message */
+p.error {
+  color: red;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+/* Styling for buttons */
+button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #19105b;
+  color: #fff;
+  margin-top: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button.back {
+  background-color: #ccc;
+  margin-right: 10px;
+}
+
+button.back:hover {
+  background-color: #bbb;
+}
+
+button.register:hover {
+  background-color: #19105b;
+}
+
+/* Styling for the button container */
+.btn {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}

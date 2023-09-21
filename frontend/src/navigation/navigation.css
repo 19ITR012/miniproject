@@ -1,0 +1,135 @@
+/* .nav-bars{
+  disdplay: grid;
+  grid-temgplate-columns: auto 1fr;
+  height: 100%;
+} */
+
+.menu,
+.menu-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 4em;
+  text-align: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(#19105b, #472067, #7c3375, #FF6196) !important;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.logo{
+  margin-top: 10px;
+}
+
+.username {
+  margin-top: 2em;
+  background-color: red;
+  text-align: center;
+  color: white;
+  font-family: "Arial" !important;
+}
+
+.menu li a {
+  line-height: 3em;
+  text-align: center;
+  color: white;
+  /* position: relative; */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.1s ease-in-out;
+}
+
+.menu-bar {
+  overflow: hidden;
+  text-align: left;
+  left: 4em;
+  z-index: 5;
+  width: 0;
+  height: 0;
+  transition: all 0.1s ease-in-out;
+}
+
+.close-btn{
+  color: white;
+  width:fit-content;
+  position: relative;
+  left: 80%;
+  bottom: 3px;
+}
+
+.menu-bar li a {
+  display: block;
+  height: 3em;
+  line-height: 1em;
+  text-align: left;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: background 0.1s ease-in-out;
+}
+
+.open {
+  width: 12em;
+  height: 100%;
+}
+
+.bottom {
+  width: 100%;
+  margin-top: 20vh;
+  margin-left: 3.5vh;
+  margin-right: auto;
+}
+
+.line{
+  background-color: white;
+  height: 0.5px;
+  box-shadow: 0 0 0 0.7px white;
+  width: 7em;
+  overflow: hidden;
+  opacity: 0.8;
+  border-radius: 100%;
+  top:92%;
+  position: fixed;
+}
+
+.signout {
+  margin-left: 40%;
+  color: white;
+  text-align: center;
+}
+
+.butn{
+  border:none;
+  max-width: max-content;
+  background-color: transparent;
+  color: white;
+  margin-right: 40px;
+  position: fixed !important;
+  top:93%;
+  left: 0.8%;
+}
+
+@media screen and (max-width: 34em) {
+  .menu li,
+  .menu-bar {
+    font-size: 70%;
+    left: 5.7em;
+  }
+}
+
+@media screen and (max-height: 34em) {
+  .menu li,
+  .menu-bar {
+    font-size: 70%;
+    left: 5.7em;
+  }
+}
+
+/* @media screen and (max-height: 34em) and (max-width: 500px){
+  .mengu{
+        height:3.5em;
+    }
+} */

@@ -1,0 +1,88 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Adjust as needed */
+}
+
+.jin-image {
+    flex: 1;
+    padding: 0px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    height: 619px;
+}
+
+.jin-image img {
+    max-width: 130%;
+    max-height: 100%;
+}
+
+.input-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+}
+
+.input-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-family: Arial;
+}
+
+.input-container input {
+    width: 20em;
+}
+.input-container input,
+.input-container button {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+}
+
+.input-container button {
+    background-color: #19105b;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+h1{
+    color: #19105b;
+    font-family: Arial;
+}
+
+h2{
+    color: #19105b;
+    font-family: Arial;
+    text-align: center;
+}
+
+.signup-container {
+    margin-top: 20px;
+    text-align: center;
+    font-family: Arial;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    gap: 10px;
+  }
+
+.signup-btn{
+    background-color: #19105b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: Arial;
+}
