@@ -38,11 +38,10 @@ export function Register() {
     try {
       debugger
       console.log(username,email)
-      const response = await axios.post('http://localhost:4000/register', {
+      const response = await axios.post('http://localhost:4000/user/register', {
         username,
         email,
         password,
-        reenteredPassword,
       });
       console.log('Registration response:', response.data);
   

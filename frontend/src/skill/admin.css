@@ -1,0 +1,49 @@
+/* admin.css */
+
+/* Style for the search input */
+.search-input {
+    width: 200px !important;
+    margin-bottom: 16px !important;
+    padding-top: 1% !important;
+  }
+  
+  /* Style for the table container */
+  .MuiPaper-root {
+    margin-top: 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+  
+  /* Style for table header cells */
+  .MuiTableCell-head {
+    font-weight: bold;
+    background-color: #19105b;
+    padding: 12px;
+  }
+
+  /* Style for table rows */
+  .MuiTableRow-root {
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  /* Style for odd table rows */
+  .MuiTableRow-root:nth-child(odd) {
+    background-color: #f9f9f9;
+    color: black !important;
+  }
+  
+  /* Style for table cells */
+  .MuiTableCell-root {
+    padding: 12px;
+    color: #fff;
+  }
+  
+  /* Style for loading text */
+  .loading-text {
+    font-style: italic;
+    padding: 12px;
+  }
+  .Table_head{
+    color: white!important;
+    background-color: aqua!important;
+  }

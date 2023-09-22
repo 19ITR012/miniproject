@@ -8,43 +8,41 @@ import Cookies from 'js-cookie';
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [data,setData]=useState([])
-
   const navigate = useNavigate();
 
   async function handleSubmit() {
     const userdetails = {
-      username: username,
-      password: password,
+      username,
+      password,
     };
+
     try {
-      const response = await axios.post("http://localhost:4000/login", { userdetails });
-    
-      if (response.status === 200) {
-        const { userData } = response.data; 
-        const { UserId, UserName, IsAdmin } = userData; 
-        console.log("sds",IsAdmin);
-        
-        console.log("UserId:", UserId);
-        console.log("UserName:", UserName);
-        
+      const response = await axios.post("http://localhost:4000/user/login", userdetails);
+
+      if (response.data.message === "Login successful") {
+        const { userData } = response.data;
+        const { UserId, UserName, IsAdmin } = userData;
+
+        // Store user information in cookies
         Cookies.set('username', UserName);
         Cookies.set('userID', UserId);
-        
+
         if (IsAdmin) {
           navigate("/Admin");
         } else {
           navigate("/Skill");
         }
       } else {
-        alert("Invalid credentials");
+        // Display a more specific error message if needed
+        alert("Login failed. Please check your credentials.");
       }
     } catch (error) {
       console.error("Error during API call:", error);
-      alert("Invalid credentials");
+
+      // Display an error message to the user
+      alert("An error occurred during login. Please try again later.");
     }
   }
-    
   return (
     <div className='login-container'>
       <div className='jin-image'>

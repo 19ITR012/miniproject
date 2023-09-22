@@ -1,103 +1,107 @@
-import React, { useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
+import React, { useEffect, useState } from 'react';
+import TextField from '@mui/material/TextField'; // Import TextField from Material-UI
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import axios from 'axios';
 import Row from './Row';
+import './admin.css';
+
+import { createTheme, ThemeProvider, styled} from '@mui/material/styles';
 
 
-
-// Row.propTypes = {
-//   row: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     project: PropTypes.string.isRequired,
-//     status: PropTypes.string.isRequired,
-//     startDate: PropTypes.string.isRequired,
-//     endDate: PropTypes.string.isRequired,
-//     history: PropTypes.arrayOf(
-//       PropTypes.shape({
-//         Skill_Name: PropTypes.string.isRequired,
-//         Skill_Category: PropTypes.string.isRequired,
-//         Iscertified: PropTypes.string.isRequired,
-//       })
-//     ).isRequired,
-//   }).isRequired,
-// };
 
 export default function CollapsibleTable() {
+
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  useEffect(async() => {
+  useEffect(async () => {
     console.log("fetch");
-    let data=await axios.get('http://localhost:4000/admin/data')
-    .then((res)=>{
-      console.log(res);
-      setRows(res.data)
-      setLoading(false);
-    })
-      // .then((response) => response.json())
-      // .then((data) => {
-      //   const formattedRows = data.map((user) => {
-      //     return createData(
-      //       user.UserName,
-      //       user.project,
-      //       user.status,
-      //       user.startDate,
-      //       user.endDate,
-      //       user.skills
-      //     );
-      //   });
-      //   setRows(formattedRows);
-      //   setLoading(false);
-      // })
-      // .catch((error) => {
-      //   console.error('Error fetching user data:', error);
-      //   setLoading(false);
-      // });
+    let data = await axios.get('http://localhost:4000/skill/admin/data')
+      .then((res) => {
+        console.log(res);
+        setRows(res.data)
+        setLoading(false);
+      })
   }, []);
 
+  const CustomCheckbox = styled(TableCell)(({ theme }) => ({
+    color: "white",
+    backgroundColor: "#19105B",
+    fontSize: 14,
+    fontFamily: "sans-serif"
+  }));
+  
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#19105B',
+      },
+    },
+  });
 
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   return (
-    <TableContainer component={Paper}>
-      {console.log(rows)}
-      <Table aria-label="collapsible table">
-        <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Resource Name</TableCell>
-            <TableCell align="right">Current project</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="right">Start Date</TableCell>
-            <TableCell align="right">End Date</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {loading ? (
-            <TableRow>
-              <TableCell colSpan={6}>Loading...</TableCell>
+    <div>
+      <h1>Skills</h1>
+      <TextField
+        className="search-input"
+        label="Search"
+        type="text"
+        variant="outlined"
+        fullWidth
+        size="small"
+        padding-bottom="5px"
+        padding-right="5px"
+        style={{ width: '200px' }} 
+        value={searchQuery}
+        onChange={handleSearch}
+      />
+      <TableContainer component={Paper}>
+        {console.log(rows)}
+        <Table aria-label="collapsible table">
+          <TableHead>
+            <TableRow className='Table_head'>
+              <ThemeProvider theme={theme}>
+              <CustomCheckbox></CustomCheckbox>
+              <CustomCheckbox>Resource Name</CustomCheckbox>
+              <CustomCheckbox align="right">Current project</CustomCheckbox>
+              <CustomCheckbox align="right">Status</CustomCheckbox>
+              <CustomCheckbox align="right">Start Date</CustomCheckbox>
+              <CustomCheckbox align="right">End Date</CustomCheckbox>
+              </ThemeProvider>
             </TableRow>
-          ) :
-           (
-            rows.map((row, index) => (
-              <Row key={index} row={row} />
-            ))
-          )
-          }
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {loading ? (
+              <TableRow>
+                <TableCell colSpan={6}>Loading...</TableCell>
+              </TableRow>
+            ) : (
+              rows
+                .filter((row) =>
+                  row.UserName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                  (row.skills &&
+                    row.skills.some((skill) =>
+                      skill.Skill_Name.toLowerCase().includes(searchQuery.toLowerCase())
+                    ))
+                )
+                .map((row, index) => (
+                  <Row key={index} row={row} />
+                ))
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
