@@ -50,6 +50,11 @@ export default function CollapsibleTable() {
     setSearchQuery(event.target.value);
   };
 
+  const filteredRows = rows.filter((row) =>
+    row.Skill_Names.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+
   return (
     <div>
       <h1>Skills</h1>
@@ -87,17 +92,9 @@ export default function CollapsibleTable() {
                 <TableCell colSpan={6}>Loading...</TableCell>
               </TableRow>
             ) : (
-              rows
-                .filter((row) =>
-                  row.UserName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                  (row.skills &&
-                    row.skills.some((skill) =>
-                      skill.Skill_Name.toLowerCase().includes(searchQuery.toLowerCase())
-                    ))
-                )
-                .map((row, index) => (
-                  <Row key={index} row={row} />
-                ))
+              filteredRows.map((row, index) => (
+                <Row key={index} row={row} />
+              ))
             )}
           </TableBody>
         </Table>
