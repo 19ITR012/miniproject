@@ -1,7 +1,7 @@
 const db = require('../config/dbConfig');
 
 const registerUser = (req, res) => {
-    const { username, password, email } = req.body;
+    const { username, password, email, cdmid } = req.body;
 
     // Check if the username or email already exists in the database
     db.query(
@@ -19,8 +19,8 @@ const registerUser = (req, res) => {
 
             // If the username and email are unique, insert the new user into the database
             db.query(
-                'INSERT INTO user_details (UserName, Password, EmailId) VALUES (?, ?, ?)',
-                [username, password, email],
+                'INSERT INTO user_details (UserName, Password, EmailId, CDMId) VALUES (?, ?, ?, ?)',
+                [username, password, email, cdmid],
                 (error, result) => {
                     if (error) {
                         console.error(error);

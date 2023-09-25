@@ -71,8 +71,15 @@ function SkillRow(props) {
       <TableCell align="right">
         <input
           type="checkbox"
-          checked={newSkill.certified}
+          value={newSkill.certified}
           onChange={(e) => setNewSkill({ ...newSkill, certified: e.target.checked })}
+        />
+      </TableCell>
+      <TableCell align="right">
+        <input
+          type="date"
+          value={newSkill.completeddate}
+          onChange={(e) => setNewSkill({ ...newSkill, completeddate: e.target.value })}
         />
       </TableCell>
       <TableCell align="right">
@@ -87,7 +94,7 @@ function SkillRow(props) {
 function Row(props) {
   const { row, updateRow } = props;
   const [open, setOpen] = useState(false);
-  const [newSkill, setNewSkill] = useState({ skillName: '', skillCategory: '', certified: false });
+  const [newSkill, setNewSkill] = useState({ skillName: '', skillCategory: '', certified: false, completeddate:''});
   const userid = Cookies.get('userID');
   const [skillDetails, setSkillDetails] = useState([]);
 
@@ -116,9 +123,9 @@ function Row(props) {
         skillName: newSkill.skillName,
         skillCategory: newSkill.skillCategory,
         certified: newSkill.certified,
+        completeddate:newSkill.completeddate,
         userId: userid,
       };
-
       axios
         .post('http://localhost:4000/skill/Skill', skillData)
         .then((response) => {
@@ -131,7 +138,7 @@ function Row(props) {
               console.log(refreshResponse);
               updateSkills(refreshResponse.data);
 
-              setNewSkill({ skillName: '', skillCategory: '', certified: false });
+              setNewSkill({ skillName: '', skillCategory: '', certified: false,completeddate:''});
             })
             .catch((refreshError) => {
               console.error(refreshError);
@@ -179,6 +186,7 @@ function Row(props) {
                     <CustomCheckbox>Skill Name</CustomCheckbox>
                     <CustomCheckbox>Skill Category</CustomCheckbox>
                     <CustomCheckbox align="right">Certified</CustomCheckbox>
+                    <CustomCheckbox align="right">Completed Date</CustomCheckbox>
                     <CustomCheckbox align="right">Actions</CustomCheckbox>
                     </ThemeProvider>
                   </TableRow>
@@ -187,11 +195,13 @@ function Row(props) {
                   {console.log(skillDetails)}
                   {skillDetails.map((skill, index) => (
                     <TableRow key={index}>
-                      
                       <TableCell>{skill.Skill_Name}</TableCell>
                       <TableCell>{skill.Skill_Category}</TableCell>
                       <TableCell align="right">
                         {skill.Iscertified === '1' ? 'Yes' : 'No'}
+                      </TableCell>
+                      <TableCell align="right">
+                      {new Date(skill.CompletedDate).toLocaleDateString('en-GB')}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -214,7 +224,7 @@ const CollapsibleTable = () => {
   const username = Cookies.get('username');
 
   const [rows, setRows] = useState([
-    createData(username, 'Project A', 'Billable', '21.09.2023', '15.10.2023'),
+    createData(username, 'Project A', 'Billable', '21/09/2023', '15/10/2023'),
   ]);
   const [loading, setLoading] = useState(true);
 

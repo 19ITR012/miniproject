@@ -19,16 +19,20 @@ function Row(props) {
   const { row } = props;
   const [open, setOpen] = useState(false);
   const [skills, setSkills] = useState([]);
+  
+
 
   useEffect(() => {
     const skillNames = row.Skill_Names ? row.Skill_Names.split(',') : [];
     const skillCategories = row.Skill_Categories ? row.Skill_Categories.split(',') : [];
     const isCertified = row.Iscertified ? row.Iscertified.split(',') : [];
+    const completeddate = row.CompletedDate ? row.CompletedDate.split(',') : [];
 
     const skillData = skillNames.map((name, index) => ({
         Skill_Name: name,
         Skill_Category: skillCategories[index],
         Iscertified: isCertified[index]=== '1' ? 'Yes' : 'No',
+        CompletedDate: completeddate[index]
       }))   
 
     setSkills(skillData);
@@ -66,8 +70,8 @@ function Row(props) {
           </TableCell >
           <TableCell align="right">Project A</TableCell>
           <TableCell align="right">Billable{row.status}</TableCell>
-          <TableCell align="right">21.09.2023</TableCell>
-          <TableCell align="right">15.10.2023</TableCell>
+          <TableCell align="right">21/09/2023</TableCell>
+          <TableCell align="right">15/10/2023</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -83,6 +87,7 @@ function Row(props) {
                       <CustomCheckbox>Skill Name</CustomCheckbox>
                       <CustomCheckbox>Skill Category</CustomCheckbox>
                       <CustomCheckbox align="right">Certified</CustomCheckbox>
+                      <CustomCheckbox align="right">Completed Date</CustomCheckbox>
                       </ThemeProvider>
                     </TableRow>
                   </TableHead>
@@ -92,6 +97,9 @@ function Row(props) {
                         <TableCell>{skill.Skill_Name}</TableCell>
                         <TableCell>{skill.Skill_Category}</TableCell>
                         <TableCell align="right">{skill.Iscertified}</TableCell>
+                        <TableCell align="right">
+                        {new Date(skill.CompletedDate).toLocaleDateString('en-GB')}
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TextField from '@mui/material/TextField'; // Import TextField from Material-UI
+import TextField from '@mui/material/TextField';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -57,7 +57,7 @@ export default function CollapsibleTable() {
 
   return (
     <div>
-      <h1>Skills</h1>
+      <h1>Employe Skills</h1>
       <TextField
         className="search-input"
         label="Search"

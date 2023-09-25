@@ -4,14 +4,14 @@ import axios from 'axios';
 import jinbg from './jinbg.png'
 import './register.css';
 
-const navigate = useNavigate();
-
 export function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [reenteredPassword, setReenteredPassword] = useState('');
   const [passwordMatchError, setPasswordMatchError] = useState(false);
+  const [cdmid, setcdmid] = useState('');
+  const navigate = useNavigate();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -44,6 +44,7 @@ export function Register() {
         username,
         email,
         password,
+        cdmid
       });
       console.log('Registration response:', response.data);
   
@@ -51,14 +52,16 @@ export function Register() {
       console.log('Username:', username);
       console.log('Email:', email);
       console.log('Password:', password);
+      console.log('CdmId:', cdmid);
   
       setUsername('');
       setEmail('');
       setPassword('');
       setReenteredPassword('');
       setPasswordMatchError(false);
+      setcdmid('');
 
-      navigate('/login');
+      navigate('/');
       alert('Registration successful!');
     } catch (error) {
       console.error('Error during registration:', error);
@@ -116,6 +119,17 @@ export function Register() {
             required
           />
           {passwordMatchError && <p>Passwords do not match.</p>}
+        </div>
+
+        <div>
+          <input
+          className='input'
+            type="text"
+            value={cdmid}
+            onChange={(e) => setcdmid(e.target.value)}
+            placeholder='Enter your CDM ID'
+            required
+          />
         </div>
 
         <div className='btn'>
