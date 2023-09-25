@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import jinbg from './jinbg.png'
 import './register.css';
+
+const navigate = useNavigate();
 
 export function Register() {
   const [username, setUsername] = useState('');
@@ -55,7 +57,8 @@ export function Register() {
       setPassword('');
       setReenteredPassword('');
       setPasswordMatchError(false);
-  
+
+      navigate('/login');
       alert('Registration successful!');
     } catch (error) {
       console.error('Error during registration:', error);
