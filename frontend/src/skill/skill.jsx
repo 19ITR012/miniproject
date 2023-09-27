@@ -84,7 +84,7 @@ function SkillRow(props) {
       </TableCell>
       <TableCell align="right">
         <IconButton variant="outlined" onClick={handleAddSkill}>
-          <AddIcon /> {/* Add the "+" icon */}
+          <AddIcon /> 
         </IconButton>
       </TableCell>
     </TableRow>
@@ -94,7 +94,7 @@ function SkillRow(props) {
 function Row(props) {
   const { row, updateRow } = props;
   const [open, setOpen] = useState(false);
-  const [newSkill, setNewSkill] = useState({ skillName: '', skillCategory: '', certified: false, completeddate:''});
+  const [newSkill, setNewSkill] = useState({ skillName: '', skillCategory: '', certified: false, completeddate:'',cmdid:''});
   const userid = Cookies.get('userID');
   const [skillDetails, setSkillDetails] = useState([]);
 
@@ -109,7 +109,7 @@ function Row(props) {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [userid]);
 
   const updateSkills = (updatedSkills) => {
     setSkillDetails(updatedSkills);

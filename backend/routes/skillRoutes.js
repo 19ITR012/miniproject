@@ -6,4 +6,5 @@ router.post('/Skill', skillController.addSkill);
 router.get('/Skill/:userid', skillController.getSkillsByUserId);
 router.get('/admin/data', skillController.getSkillAdmin);
 
+
 module.exports = router;

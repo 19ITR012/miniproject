@@ -1,9 +1,8 @@
-const { log } = require('console');
 const db = require('../config/dbConfig');
 
 const addSkill = (req, res) => {
-    const { skillName, skillCategory, certified, completeddate,userId } = req.body;
-    console.log(req.body)
+    const { skillName, skillCategory, certified, userId } = req.body;
+
     // Check if required fields are provided
     if (!skillName || !skillCategory || !userId) {
         return res.status(400).json({ message: 'Skill Name, Skill Category, and UserID are required fields.' });
@@ -11,15 +10,14 @@ const addSkill = (req, res) => {
 
     // Insert the skill into the database
     db.query(
-        'INSERT INTO skill_details (Skill_Name, Skill_Category, Iscertified,CompletedDate, UserId) VALUES (?, ?, ?, ?,?)',
-        [skillName, skillCategory, certified, completeddate, userId],
+        'INSERT INTO skill_details (Skill_Name, Skill_Category, Iscertified, UserId) VALUES (?, ?, ?, ?)',
+        [skillName, skillCategory, certified, userId],
         (error, result) => {
             if (error) {
-                console.log(result)
-                console.log(error);
+                console.error(error);
                 return res.status(500).json({ message: 'Internal server error' });
             }
-            console.log(result)
+
             console.log('Skill added successfully');
             return res.status(200).json({ message: 'Skill added successfully' });
         }
@@ -31,14 +29,14 @@ const getSkillsByUserId = (req, res) => {
 
     // Retrieve skills for the specified user from the database
     db.query(
-        'SELECT Skill_Name, Skill_Category, Iscertified, CompletedDate FROM skill_details WHERE UserId = ?',
+        'SELECT Skill_Name, Skill_Category, Iscertified,CompletedDate FROM skill_details WHERE UserId = ?',
         [userId],
         (error, results) => {
             if (error) {
                 console.error('Error querying MySQL:', error);
                 return res.status(500).json({ error: 'An error occurred while fetching skill details' });
             }
-            console.log(results)
+
             res.json(results);
         }
     );
@@ -52,7 +50,7 @@ const getSkillAdmin = (req, res) => {
     GROUP_CONCAT(sd.Skill_Name) AS Skill_Names,
     GROUP_CONCAT(sd.Skill_Category) AS Skill_Categories,
     GROUP_CONCAT(sd.Iscertified) AS Iscertified,
-    GROUP_CONCAT(sd.CompletedDate) AS CompletedDate,
+    GROUP_CONCAT(sd.CompletedDate) AS CompletedDate
 FROM
     user_details ud
 JOIN
@@ -63,15 +61,11 @@ GROUP BY
     ud.UserId,ud.UserName`;
 
     db.query(sql, (error, results) => {
-       
         if (error) {
-            console.log(error)
-            res.send("error")
-            // return handleDatabaseError(res, error);
+            return handleDatabaseError(res, error);
         }
-        else{
-        console.log("holaaaaa,.,.,.,.,<><><><><><>",results);
-        return res.status(200).json(results);}
+        console.log(results);
+        return res.status(200).json(results);
     });
 }
 
