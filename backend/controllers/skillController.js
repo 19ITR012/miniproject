@@ -1,7 +1,7 @@
 const db = require('../config/dbConfig');
 
 const addSkill = (req, res) => {
-    const { skillName, skillCategory, certified, userId } = req.body;
+    const { skillName, skillCategory, certified, userId ,completeddate} = req.body;
 
     // Check if required fields are provided
     if (!skillName || !skillCategory || !userId) {
@@ -10,8 +10,8 @@ const addSkill = (req, res) => {
 
     // Insert the skill into the database
     db.query(
-        'INSERT INTO skill_details (Skill_Name, Skill_Category, Iscertified, UserId) VALUES (?, ?, ?, ?)',
-        [skillName, skillCategory, certified, userId],
+        'INSERT INTO skill_details (Skill_Name, Skill_Category, Iscertified,CompletedDate,UserId) VALUES (?, ?, ?, ?, ?)',
+        [skillName, skillCategory, certified,completeddate, userId],
         (error, result) => {
             if (error) {
                 console.error(error);

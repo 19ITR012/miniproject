@@ -34,13 +34,14 @@ function Login() {
         }
       } else {
         // Display a more specific error message if needed
-        alert("Login failed. Please check your credentials.");
+        alert("An error occurred during login. Please try again later.");
       }
     } catch (error) {
       console.error("Error during API call:", error);
 
       // Display an error message to the user
-      alert("An error occurred during login. Please try again later.");
+      alert("Login failed. Please check your credentials.");
+      
     }
   }
   return (
